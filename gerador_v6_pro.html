@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador V6 PRO — JOGA WILL</title>
+
+<style>
+body{background:#000;color:#fff;font-family:Arial, sans-serif;margin:0;padding:20px;}
+.container{max-width:900px;margin:auto;background:#111;padding:20px;border-radius:10px;}
+input,textarea,select{width:100%;padding:10px;border-radius:6px;border:none;margin-bottom:12px;background:#222;color:#fff;}
+button{padding:10px 18px;border:none;background:#00e0ff;color:#000;font-weight:bold;border-radius:6px;cursor:pointer;margin-right:10px;}
+iframe{width:100%;height:420px;background:#000;border:1px solid #333;margin-top:20px;}
+h2{color:#00e0ff;margin-bottom:20px;text-align:center;}
+</style>
+
+<script>
+function gerarHTML(){
+    const titulo = document.getElementById("titulo").value;
+    const imagem = document.getElementById("imagem").value;
+    const texto = document.getElementById("texto").value.replace(/\n\n/g,"</p><p>");
+    const video = document.getElementById("video").value;
+    const play = document.getElementById("play").value;
+    const app = document.getElementById("app").value;
+    const steam = document.getElementById("steam").value;
+
+    const finalHTML = `
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>${titulo}</title>
+
+<!-- POPUNDER -->
+<script type="text/javascript">
+ atOptions = { 'key': 'pop_key', 'format': 'popunder', 'height': 600, 'width': 800, 'params': {} };
+</script>
+<script type="text/javascript" src="//www.profitablegdprnetwork.com/poppop.js"></script>
+
+<style>
+body{background:#000;color:#fff;font-family:Arial;margin:0;padding:0;}
+.post{max-width:750px;margin:auto;padding:20px;}
+.post img{width:100%;border-radius:10px;}
+iframe{width:100%;height:360px;border-radius:10px;margin-top:18px;}
+.links a{display:block;background:#00e0ff;color:#000;padding:10px;text-align:center;margin-top:8px;border-radius:6px;font-weight:bold;}
+</style>
+</head>
+
+<body>
+<header style="background:#0b0b0b;padding:15px;text-align:center;color:#00e0ff;font-weight:bold;font-size:22px;">JOGA WILL</header>
+
+<div class="post">
+<h1 style="text-align:center;">${titulo}</h1>
+<img src="${imagem}" />
+
+<p>${texto}</p>
+
+<iframe src="https://www.youtube.com/embed/${video}" allowfullscreen></iframe>
+
+<div class="links">
+${play? `<a href="${play}" target="_blank">PLAY STORE</a>`:""}
+${app? `<a href="${app}" target="_blank">APP STORE</a>`:""}
+${steam? `<a href="${steam}" target="_blank">STEAM</a>`:""}
+</div>
+
+</div>
+</body>
+</html>
+`;
+
+    document.getElementById("preview").srcdoc = finalHTML;
+    window.generatedHTML = finalHTML;
+}
+
+function copiar(){
+    navigator.clipboard.writeText(window.generatedHTML||"");
+}
+
+function baixar(){
+    const blob = new Blob([window.generatedHTML],{type:"text/html"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href=url;
+    a.download="post.html";
+    a.click();
+}
+</script>
+
+</head>
+<body>
+
+<div class="container">
+<h2>Gerador V6 PRO — JOGA WILL</h2>
+
+<label>Título</label>
+<input id="titulo">
+
+<label>Imagem (URL)</label>
+<input id="imagem">
+
+<label>Texto (parágrafos automáticos)</label>
+<textarea id="texto" rows="8"></textarea>
+
+<label>ID do Vídeo YouTube</label>
+<input id="video" placeholder="Ex: dQw4w9WgXcQ">
+
+<label>Link Play Store</label>
+<input id="play">
+
+<label>Link App Store</label>
+<input id="app">
+
+<label>Link Steam</label>
+<input id="steam">
+
+<button onclick="gerarHTML()">Gerar Preview</button>
+<button onclick="copiar()">Copiar HTML</button>
+<button onclick="baixar()">Baixar HTML</button>
+
+<iframe id="preview"></iframe>
+
+</div>
+</body>
+</html>
